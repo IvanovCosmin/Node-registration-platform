@@ -3,19 +3,17 @@
   <body>
     <div class="col-sm-8 col-sm-offset-2">
       <div class="text-center">
-        <h1 class=" fa fa-user"> Profile</h1><br>
+        <h1>Alege activitatile </h1><br>
         <span><strong>user id</strong>: <%= user._id ? user._id : '' %></span><br>
         <span class="fa fa-sign-out"><a href="/"> Sign out</a></span>
         <hr>
-        <div class="jumbotron">
+        <!--div class="jumbotron">
           <% if (user.local.email != null) { %>
-            <img src="https://avatars.io/gravatar/<%= user.local.email %>/140" class="img-circle"><br>
             <strong>email</strong>: <%= user.local.email %><br>
           <% } %>
 
           <% if (user.facebook.id != null) { %>
             <h2 class="fa fa-facebook"> Facebook</h2><br>
-            <img src="https://avatars.io/gravatar/<%= user.facebook.email %>/140" class="img-circle"><br>
             <strong>id</strong>: <%= user.facebook.id %><br>
             <strong>email</strong>: <%= user.facebook.email %><br>
             <strong>name</strong>: <%= user.facebook.name %>
@@ -23,7 +21,6 @@
 
           <% if (user.twitter.id != null) { %>
             <h2 class="fa fa-twitter"> Twitter</h2><br>
-            <img src="https://avatars.io/twitter/<%= user.twitter.username %>" class="img-circle"><br>
             <strong>id</strong>: <%= user.twitter.id %><br>
             <strong>token</strong>: <%= user.twitter.token %><br>
             <strong>username</strong>: <%= user.twitter.username %><br>
@@ -32,14 +29,324 @@
 
           <% if (user.google.id != null) { %>
             <h2 class="fa fa-google-plus"> Google</h2><br>
-            <img src="https://avatars.io/gravatar/<%= user.google.email %>/140" class="img-circle"><br>
             <strong>id</strong>: <%= user.google.id %><br>
             <strong>token</strong>: <%= user.google.token %><br>
             <strong>email</strong>: <%= user.google.email %><br>
             <strong>name</strong>: <%= user.google.name %>
           <% } %>
-        </div>
+          </div-->
+          <form action="profile" method="POST" id="formId">
+              <div class="form-group">
+                <label for="nume">Nume</label>
+                <input type="text" class="form-control" id="nume" placeholder="Nume" name="nume" value = "<%= user.nume || 'Costel' %>" >
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email" placeholder="Email" name="email" value = "<%= user.local.email || 'email@pls.com' %>" >
+              </div>
+              <div class="form-group">
+                <label for="prenume">Prenume</label>
+                <input type="text" class="form-control" id="prenume" placeholder="Prenume" name="prenume" value = "<%= user.prenume || 'Biju' %>">
+              </div>
+              <div class="form-group">
+                <label for="nr">Numar de ore pe saptamana</label>
+                <input onclick="c(0);" type="number" class="form-control" id="nr" placeholder="Numar de ore" name="nr"  value = "<%= user.nr || '30' %>">
+              </div>
+              <div class="form-group">
+                <label for="clasa">Clasa (ex: "VA" pentru "a V-a A" sau "XIIC" pentru "a XII-a C") </label>
+                <input type="text" class="form-control" id="clasa" placeholder="Clasa" name="clasa" value = "<%= user.clasa || 'VA' %>">
+              </div>
+               <div class="form-group">
+                <label for="comment">Mentiuni</label>
+                <textarea class="form-control" rows="5" id="comment"  placeholder="Mentiuni (concurs , exursie , nada nada)" name="info"><%= user.info %></textarea>
+              </div>
+  <input id="heh" name="activities" value= "<%= user.activities || '' %>" type="hidden">
+  <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+<br>
+          <div class="alert alert-info" id="msg">
+            <strong>Alege-ti activitatile !</strong>
+          </div>
+          <br>
+<h2> Excursii (daca mergi la o excursie nu e necesar sa mergi la alte activitati , ai destule ore) </h2>
+<% ex.forEach(function(i) { %>
+        <label class="checlbocx-inline" > <input type="checkbox" onclick="e(this);" value="<%= i.id %>" data-start = "10:<%= i.start %>" data-end="99:<%= i.end %>" name = "<%= i.id %>" id = "<%= i.id %>" > <%= i.nume %> </label>
+        <button type="button" class="btn btn-info" data-toggle="popover" title="Info" data-content="<%= i.info %>">Info</button> <br>
+        <div>Numar locuri:<div><%= i.nr - i.legume.length %></div></div>
+        <br>
+<% }); %>
+<br>
+
+<div id="exTab3" class="container">	
+<ul  class="nav nav-pills">
+			<li class="active">
+        <a  href="#1b" data-toggle="tab">Luni</a>
+			</li>
+			<li><a href="#2b" data-toggle="tab">Marti</a>
+			</li>
+			<li><a href="#3b" data-toggle="tab">Miercuri</a>
+			</li>
+  		<li><a href="#4b" data-toggle="tab">Joi</a>
+			</li>
+      <li><a href="#5b" data-toggle="tab">Vineri</a>
+			</li>
+		</ul>
+
+			<div class="tab-content clearfix">
+			  <div class="tab-pane active" id="1b">
+
+          <% item0.forEach(function(i) { %>
+            <div class="col-sm-6">
+              <div class="card card-block">
+                <h3 class="card-title"><%= i.nume %></h3>
+                <p class="card-text"><%= i.info %><br>
+                Nr.ore:<%= i.nr - i.legume.length %>
+                </p>
+                <input type="checkbox" onclick="c(this);" value="<%= i.id %>" data-start = "<%= i.ziua %>:<%= i.start %>"  data-end="<%= i.ziua %>:<%= i.end %>" name = "<%= i.id %>" id="<%= i.id %>">
+              </div>
+            </div>
+             
+<% }); %>
+
+				</div>
+				<div class="tab-pane" id="2b">
+          <% item1.forEach(function(i) { %>
+            <div class="col-sm-6">
+              <div class="card card-block">
+                <h3 class="card-title"><%= i.nume %></h3>
+                <p class="card-text"><%= i.info %><br>
+                Nr.ore:<%= i.nr - i.legume.length %>
+                </p>
+                <input type="checkbox" onclick="c(this);" value="<%= i.id %>" data-start = "<%= i.ziua %>:<%= i.start %>"  data-end="<%= i.ziua %>:<%= i.end %>" name = "<%= i.id %>" id="<%= i.id %>">
+              </div>
+            </div>
+             
+<% }); %>
+				</div>
+        <div class="tab-pane" id="3b">
+          <% item2.forEach(function(i) { %>
+            <div class="col-sm-6">
+              <div class="card card-block">
+                <h3 class="card-title"><%= i.nume %></h3>
+                <p class="card-text"><%= i.info %><br>
+                Nr.ore:<%= i.nr - i.legume.length %>
+                </p>
+                <input type="checkbox" onclick="c(this);" value="<%= i.id %>" data-start = "<%= i.ziua %>:<%= i.start %>"  data-end="<%= i.ziua %>:<%= i.end %>" name = "<%= i.id %>" id="<%= i.id %>">
+              </div>
+            </div>
+             
+<% }); %>
+				</div>
+          <div class="tab-pane" id="4b">
+          <% item3.forEach(function(i) { %>
+            <div class="col-sm-6">
+              <div class="card card-block">
+                <h3 class="card-title"><%= i.nume %></h3>
+                <p class="card-text"><%= i.info %><br>
+                Nr.ore:<%= i.nr - i.legume.length %>
+                </p>
+                <input type="checkbox" onclick="c(this);" value="<%= i.id %>" data-start = "<%= i.ziua %>:<%= i.start %>"  data-end="<%= i.ziua %>:<%= i.end %>" name = "<%= i.id %>" id="<%= i.id %>">
+              </div>
+            </div>
+             
+<% }); %>
+				</div>
+          <div class="tab-pane" id="5b">
+          <% item4.forEach(function(i) { %>
+            <div class="col-sm-6">
+              <div class="card card-block">
+                <h3 class="card-title"><%= i.nume %></h3>
+                <p class="card-text"><%= i.info %><br>
+                Nr.ore:<%= i.nr - i.legume.length %>
+                </p>
+                <input type="checkbox" onclick="c(this);" value="<%= i.id %>" data-start = "<%= i.ziua %>:<%= i.start %>"  data-end="<%= i.ziua %>:<%= i.end %>" name = "<%= i.id %>" id="<%= i.id %>">
+              </div>
+            </div>
+             
+<% }); %>
+				</div>
+			</div>
+  </div>
+
+
+
+  <h3> Pentru informatii : Condurachi Georgiana </h3>
+<br><br><br><br><br>
+
+         <!--div class="row">
+            <div class="col-sm-6">
+              <div class="card card-block">
+                <h3 class="card-title">Special title treatment</h3>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <input type="checkbox" onclick="c(this);" value="a" data-start = "1:20:00" data-end="1:30:00" name = "a" id="a">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card card-block">
+                <h3 class="card-title">Special title treatment</h3>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <input type="checkbox" onclick="c(this);" value="b" data-start = "1:20:00" data-end="1:40:00" name = "b" id = "b">
+              </div>
+            </div>
+         </div-->
+
       </div>
     </div>
+<script>
+
+let intervals = [];
+let mins = 0;
+let act = $("#heh").val() || "";
+
+init();
+
+function e(obj) {
+  if (obj.checked) {
+    mins += 99999999;
+    act += $(obj).val();
+    act = sortMe(act).join('');
+    $("#heh").val(act);
+    overlap(0);
+  }
+  else {
+    mins -= 99999999;
+    act = act.replace($(obj).val(),'');
+    $("#heh").val(act);
+    overlap(0);
+  }
+}
+
+function init(){
+  if(act !== '')
+  {
+    var a = act.split('');
+    for(var i = 0;i < a.length;i++)
+    {
+      $('#'+String(a[i])).prop('checked', true);
+      intervals.push([StringMins( $('#'+String(a[i])).data('start') ) , StringMins($('#'+String(a[i])).data('end'))]);
+      mins -= StringMins($('#'+String(a[i])).data('start')) - StringMins($('#'+String(a[i])).data('end'));
+      $('#'+String(a[i])).parents('div.card').css("background-color" , "#d9edf7");
+    }
+    for(let sub1 of intervals)
+    {
+      for(let sub2 of intervals)
+      {
+        if (intervals.indexOf(sub1) !== intervals.indexOf(sub2))
+        {
+          if (checkOverlap(sub1 , sub2))
+          {
+            overlap(1);
+            return ; 
+          }
+        }
+      }
+    }
+    overlap(0);
+  }
+}
+
+function uniq(a) {
+    var seen = {};
+    return a.filter(function(item) {
+        return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+    });
+}
+
+function sortMe(a){
+  var a = a.split('');
+  a = uniq(a);
+  return a.sort();
+}
+
+
+function overlap(k)
+{
+      if(k)
+      {
+        $("#msg").removeClass().addClass("alert alert-danger");
+        $('#msg').html("Doua sau mai multe intervale de timp se suprapun").show();
+        return ; 
+      }
+      if(mins >= 60 * document.getElementById('nr').value)
+      {
+        $("#msg").removeClass().addClass("alert alert-success");
+        $('#msg').html("Ai destule ore :D").show();
+        return ;
+      }
+      $("#msg").removeClass().addClass("alert alert-info");
+      $('#msg').html("Mai ai nevoie de " +  String(document.getElementById('nr').value - (mins/60)) + " ore" ).show();
+
+}
+
+function StringMins(String)
+{
+  let a = String.split(':');
+  return (+a[0]) * 1440  + (+a[1]) * 60 + (+a[2]); 
+}
+
+function checkOverlap(arr1 , arr2)
+{
+  if(Math.max(arr1[0],arr2[0]) < Math.min(arr1[1],arr2[1]) ) 
+  {
+    return 1;
+  }
+  return 0;
+}
+
+function c(obj) 
+{
+  if(obj !== 0)
+  {
+    if(obj.checked)
+    {
+      intervals.push([StringMins(obj.dataset.start) , StringMins(obj.dataset.end)]);
+      mins += StringMins(obj.dataset.end) - StringMins(obj.dataset.start);
+      act += $(obj).val();
+      act = sortMe(act).join('');
+      $("#heh").val(act);
+      $(obj).parents('div.card').css("background-color" , "#d9edf7");
+    }
+    else 
+    {
+      intervals.splice(intervals.indexOf([StringMins(obj.dataset.start) , StringMins(obj.dataset.end)]), 1);
+      mins -= StringMins(obj.dataset.end) - StringMins(obj.dataset.start);
+      act = act.replace($(obj).val(),'');
+      $("#heh").val(act);
+      $(obj).parents('div.card').css({"background-color" : "#ffffff" , "border-color": "#bce8f"});
+    }
+  }
+    for(let sub1 of intervals)
+    {
+      for(let sub2 of intervals)
+      {
+        if (intervals.indexOf(sub1) !== intervals.indexOf(sub2))
+        {
+          if (checkOverlap(sub1 , sub2))
+          {
+            overlap(1);
+            return ; 
+          }
+        }
+      }
+    }
+  overlap(0);
+}
+
+$(function () {
+  $('[data-toggle="popover"]').popover();
+})
+
+document.getElementById("formId").onsubmit = function () {
+    var nodes = document.getElementById('formId').childNodes;
+    for(var i=0; i<nodes.length; i++) {
+    if (nodes[i].nodeName == 'input' || nodes[i].nodeName == 'textarea') {
+         if(!node[i].value) {
+           return false;
+         }
+     }
+}
+}
+
+</script>
   </body>
 </html>

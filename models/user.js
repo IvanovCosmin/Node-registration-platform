@@ -26,7 +26,15 @@ var userSchema = mongoose.Schema({
     email: String,
     name: String,
   },
+  activities: String,
+  nume: String,
+  prenume: String,
+  nr: String,
+  clasa: String,
+  info: String,
+  cod: String
 });
+
 
 userSchema.methods.generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
@@ -37,3 +45,4 @@ userSchema.methods.validPassword = function(password) {
 };
 
 module.exports = mongoose.model('User', userSchema);
+//module.exports = mongoose.model('Act', actSchema);
