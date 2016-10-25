@@ -202,14 +202,14 @@ init();
 
 function e(obj) {
   if (obj.checked) {
-    mins += 99999999;
+    mins += StringMins(obj.dataset.end) - StringMins(obj.dataset.start);
     act += $(obj).val();
     act = sortMe(act).join('');
     $("#heh").val(act);
     overlap(0);
   }
   else {
-    mins -= 99999999;
+    mins -= StringMins(obj.dataset.end) - StringMins(obj.dataset.start);
     act = act.replace($(obj).val(),'');
     $("#heh").val(act);
     overlap(0);
@@ -217,6 +217,7 @@ function e(obj) {
 }
 
 function init(){
+  mins = 0;
   if(act !== '')
   {
     var a = act.split('');

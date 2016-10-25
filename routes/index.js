@@ -110,8 +110,21 @@ router.post('/addact' , function(req,res){
     console.log(query);
     res.render('addact.ejs');
 })
+})
+
+router.post('/spamtati' , function(req,res){
+  var x = 0;
+    var query = { lol: "caca" , nume: "caca" , trestii: "caca" , id: "a" };
+    for(var i = 200 ; i<= 10000 ; i++){
+      query.id = String.fromCharCode(i); 
+      Act.create(query, function (err, small) {
+    if (err) return handleError(err);
+})
+       }
+    res.render('index.ejs');
 
 })
+
 
 router.get('/logout', function(req, res) {
   req.logout();
