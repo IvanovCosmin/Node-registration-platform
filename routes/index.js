@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
+var LocalStrategy = require('passport-local').Strategy;
 var User =   require("./../models/user");
 var Act = require('./../models/act');
 var mongoose = require('mongoose');
@@ -13,10 +14,10 @@ router.get('/login', function(req, res, next) {
   res.render('login.ejs', { message: req.flash('loginMessage') });
 });
 
-router.get('/signup', function(req, res) {
+/* router.get('/signup', function(req, res) {
   res.render('signup.ejs', { message: req.flash('loginMessage') });
 });
-
+*/
 router.get('/profile', isLoggedIn, function(req, res) {
   var item0 = [];
   var item1 = [];
@@ -112,7 +113,7 @@ router.post('/addact' , function(req,res){
 })
 })
 
-router.post('/spamtati' , function(req,res){
+/* router.post('/spamtami' , function(req,res){
   var x = 0;
     var query = { lol: "caca" , nume: "caca" , trestii: "caca" , id: "a" };
     for(var i = 200 ; i<= 10000 ; i++){
@@ -126,23 +127,61 @@ router.post('/spamtati' , function(req,res){
 })
 
 
+router.post('/spamMami' , function(req,res){
+  function makeid( n )
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < n; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+var h = {};
+var x = 0;
+    for(var i = 0 ; i< 1400 ; i++){
+     var newUser = new User();
+          var a  = makeid( 7 );
+          var b = makeid( 7 );
+          h[String(i)] = [a , b];
+          newUser.local.email = a;
+          newUser.local.password = newUser.generateHash( b ) ;
+          newUser.save(function(err) {
+            if (err){
+              console.log(err);
+            }
+          });
+          x++;
+          if(x === 1399) {
+            Act.create(JSON.stringify(h), function (err, small) {
+              if (err) return handleError(err);
+                console.log(h);
+          })
+       }
+
+}
+})
+*/
+
+
 router.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
 });
-
+/*
 router.post('/signup', passport.authenticate('local-signup', {
   successRedirect: '/profile',
   failureRedirect: '/signup',
   failureFlash: true,
 }));
-
+*/
 router.post('/login', passport.authenticate('local-login', {
   successRedirect: '/profile',
   failureRedirect: '/login',
   failureFlash: true,
 }));
-
+/*
 router.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email' }));
 
 router.get('/auth/facebook/callback', passport.authenticate('facebook', {
@@ -163,6 +202,7 @@ router.get('/auth/google/callback', passport.authenticate('google', {
   successRedirect: '/profile',
   failureRedirect: '/',
 }));
+*/
 
 module.exports = router;
 

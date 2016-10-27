@@ -1,10 +1,12 @@
 <% include partials/head %>
 
   <body>
-    <div class="col-sm-8 col-sm-offset-2">
+    <div class="col-sm-8 col-centered">
       <div class="text-center">
-        <h1>Alege activitatile </h1><br>
-        <span><strong>user id</strong>: <%= user._id ? user._id : '' %></span><br>
+        <h1>Alege activitățile </h1><br>
+        <img class="logo text-center" src="/img/heh.png" alt="Logo">
+       <!-- <span><strong>user id</strong>: <%= user._id ? user._id : '' %></span><br> --> 
+       <br>
         <span class="fa fa-sign-out"><a href="/"> Sign out</a></span>
         <hr>
         <!--div class="jumbotron">
@@ -41,15 +43,11 @@
                 <input type="text" class="form-control" id="nume" placeholder="Nume" name="nume" value = "<%= user.nume || 'Costel' %>" >
               </div>
               <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" placeholder="Email" name="email" value = "<%= user.local.email || 'email@pls.com' %>" >
-              </div>
-              <div class="form-group">
                 <label for="prenume">Prenume</label>
                 <input type="text" class="form-control" id="prenume" placeholder="Prenume" name="prenume" value = "<%= user.prenume || 'Biju' %>">
               </div>
               <div class="form-group">
-                <label for="nr">Numar de ore pe saptamana</label>
+                <label for="nr">Număr de ore pe săptămână</label>
                 <input onclick="c(0);" type="number" class="form-control" id="nr" placeholder="Numar de ore" name="nr"  value = "<%= user.nr || '30' %>">
               </div>
               <div class="form-group">
@@ -57,8 +55,8 @@
                 <input type="text" class="form-control" id="clasa" placeholder="Clasa" name="clasa" value = "<%= user.clasa || 'VA' %>">
               </div>
                <div class="form-group">
-                <label for="comment">Mentiuni</label>
-                <textarea class="form-control" rows="5" id="comment"  placeholder="Mentiuni (concurs , exursie , nada nada)" name="info"><%= user.info %></textarea>
+                <label for="comment">Mențiuni</label>
+                <textarea class="form-control" rows="5" id="comment"  placeholder="Dacă aveți activități care se realizează doar la nivel de clasă, vă rugăm să scrieți aici numele complet al activității" name="info"><%= user.info %></textarea>
               </div>
   <input id="heh" name="activities" value= "<%= user.activities || '' %>" type="hidden">
   <button type="submit" class="btn btn-default">Submit</button>
@@ -68,16 +66,17 @@
             <strong>Alege-ti activitatile !</strong>
           </div>
           <br>
-<h2> Excursii (daca mergi la o excursie nu e necesar sa mergi la alte activitati , ai destule ore) </h2>
+<h2> Excursii. Dacă mergi in o excursie nu este necesar sa mergi la alte activități (ai destule ore). </h2>
 <% ex.forEach(function(i) { %>
         <label class="checlbocx-inline" > <input type="checkbox" onclick="e(this);" value="<%= i.id %>" data-start = "10:<%= i.start %>" data-end="99:<%= i.end %>" name = "<%= i.id %>" id = "<%= i.id %>" > <%= i.nume %> </label>
         <button type="button" class="btn btn-info" data-toggle="popover" title="Info" data-content="<%= i.info %>">Info</button> <br>
-        <div>Numar locuri:<div><%= i.nr - i.legume.length %></div></div>
+        <div>Număr locuri:<div><%= i.nr - i.legume.length %></div></div>
         <br>
 <% }); %>
 <br>
-
-<div id="exTab3" class="container">	
+      </div> </div> 
+<div class="text-center col-sm-8 col-centered">
+<div id="exTab3" class="container text-center">	
 <ul  class="nav nav-pills">
 			<li class="active">
         <a  href="#1b" data-toggle="tab">Luni</a>
@@ -91,16 +90,17 @@
       <li><a href="#5b" data-toggle="tab">Vineri</a>
 			</li>
 		</ul>
+</div>
 
 			<div class="tab-content clearfix">
 			  <div class="tab-pane active" id="1b">
 
           <% item0.forEach(function(i) { %>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
               <div class="card card-block">
                 <h3 class="card-title"><%= i.nume %></h3>
                 <p class="card-text"><%= i.info %><br>
-                Nr.ore:<%= i.nr - i.legume.length %>
+                Nr.locuri:<%= i.nr - i.legume.length %>
                 </p>
                 <input type="checkbox" onclick="c(this);" value="<%= i.id %>" data-start = "<%= i.ziua %>:<%= i.start %>"  data-end="<%= i.ziua %>:<%= i.end %>" name = "<%= i.id %>" id="<%= i.id %>">
               </div>
@@ -109,13 +109,13 @@
 <% }); %>
 
 				</div>
-				<div class="tab-pane" id="2b">
+				<div class="tab-pane rightman" id="2b">
           <% item1.forEach(function(i) { %>
-            <div class="col-sm-6">
+            <div class="col-sm-8">
               <div class="card card-block">
                 <h3 class="card-title"><%= i.nume %></h3>
                 <p class="card-text"><%= i.info %><br>
-                Nr.ore:<%= i.nr - i.legume.length %>
+                Nr.locuri:<%= i.nr - i.legume.length %>
                 </p>
                 <input type="checkbox" onclick="c(this);" value="<%= i.id %>" data-start = "<%= i.ziua %>:<%= i.start %>"  data-end="<%= i.ziua %>:<%= i.end %>" name = "<%= i.id %>" id="<%= i.id %>">
               </div>
@@ -125,11 +125,11 @@
 				</div>
         <div class="tab-pane" id="3b">
           <% item2.forEach(function(i) { %>
-            <div class="col-sm-6">
+            <div class="col-sm-8">
               <div class="card card-block">
                 <h3 class="card-title"><%= i.nume %></h3>
                 <p class="card-text"><%= i.info %><br>
-                Nr.ore:<%= i.nr - i.legume.length %>
+                Nr.locuri:<%= i.nr - i.legume.length %>
                 </p>
                 <input type="checkbox" onclick="c(this);" value="<%= i.id %>" data-start = "<%= i.ziua %>:<%= i.start %>"  data-end="<%= i.ziua %>:<%= i.end %>" name = "<%= i.id %>" id="<%= i.id %>">
               </div>
@@ -139,11 +139,11 @@
 				</div>
           <div class="tab-pane" id="4b">
           <% item3.forEach(function(i) { %>
-            <div class="col-sm-6">
+            <div class="col-sm-8">
               <div class="card card-block">
                 <h3 class="card-title"><%= i.nume %></h3>
                 <p class="card-text"><%= i.info %><br>
-                Nr.ore:<%= i.nr - i.legume.length %>
+                Nr.locuri:<%= i.nr - i.legume.length %>
                 </p>
                 <input type="checkbox" onclick="c(this);" value="<%= i.id %>" data-start = "<%= i.ziua %>:<%= i.start %>"  data-end="<%= i.ziua %>:<%= i.end %>" name = "<%= i.id %>" id="<%= i.id %>">
               </div>
@@ -153,11 +153,11 @@
 				</div>
           <div class="tab-pane" id="5b">
           <% item4.forEach(function(i) { %>
-            <div class="col-sm-6">
+            <div class="col-sm-8">
               <div class="card card-block">
                 <h3 class="card-title"><%= i.nume %></h3>
                 <p class="card-text"><%= i.info %><br>
-                Nr.ore:<%= i.nr - i.legume.length %>
+                Nr.locuri:<%= i.nr - i.legume.length %>
                 </p>
                 <input type="checkbox" onclick="c(this);" value="<%= i.id %>" data-start = "<%= i.ziua %>:<%= i.start %>"  data-end="<%= i.ziua %>:<%= i.end %>" name = "<%= i.id %>" id="<%= i.id %>">
               </div>
@@ -166,12 +166,20 @@
 <% }); %>
 				</div>
 			</div>
-  </div>
+  </div> 
 
 
+<footer class="footer text-center">
+      <div class="container footerc">
+        <p class="">Pentru informații:Condurachi Georgiana</p>
+        <p class="">Președinte CȘE</p>
+        <p class="">Clasa a 11-D (liceu sala 1.05)</p>
+        <a class="" href="https://www.facebook.com/condurachi.georgiana" >https://www.facebook.com/condurachi.georgiana</a>
+      </div>
+    </footer>
+<br><br><br><br><br><br><br><br><br><br>
 
-  <h3> Pentru informatii : Condurachi Georgiana </h3>
-<br><br><br><br><br>
+ 
 
          <!--div class="row">
             <div class="col-sm-6">
