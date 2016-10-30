@@ -4,7 +4,7 @@
     <div class="col-sm-8 col-centered">
       <div class="text-center">
         <h1>Alege activitățile </h1><br>
-        <img class="logo text-center" src="/img/heh.png" alt="Logo">
+        <img class="logo2 text-center" src="/img/heh2.png" alt="Logo">
        <!-- <span><strong>user id</strong>: <%= user._id ? user._id : '' %></span><br> --> 
        <br>
         <span class="fa fa-sign-out"><a href="/"> Sign out</a></span>
@@ -56,7 +56,7 @@
               </div>
                <div class="form-group">
                 <label for="comment">Mențiuni</label>
-                <textarea class="form-control" rows="5" id="comment"  placeholder="Dacă aveți activități care se realizează doar la nivel de clasă, vă rugăm să scrieți aici numele complet al activității" name="info"><%= user.info %></textarea>
+                <textarea class="form-control" rows="5" id="comment"  placeholder="MLC" name="info"><%= user.info %></textarea>
               </div>
   <input id="heh" name="activities" value= "<%= user.activities || '' %>" type="hidden">
   <button type="submit" class="btn btn-default">Submit</button>
@@ -76,18 +76,18 @@
 <br>
       </div> </div> 
 <div class="text-center col-sm-8 col-centered">
-<div id="exTab3" class="container text-center">	
+<div id="exTab3" class="container text-center col-centered col-sm-8">	
 <ul  class="nav nav-pills">
 			<li class="active">
-        <a  href="#1b" data-toggle="tab">Luni</a>
+        <a  href="#3b" data-toggle="tab">Miercuri</a>
 			</li>
-			<li><a href="#2b" data-toggle="tab">Marti</a>
+			<li><a href="#4b" data-toggle="tab">Joi</a>
 			</li>
-			<li><a href="#3b" data-toggle="tab">Miercuri</a>
+			<li><a href="#5b" data-toggle="tab">Vineri</a>
 			</li>
-  		<li><a href="#4b" data-toggle="tab">Joi</a>
+  		<li><a href="#1b" data-toggle="tab">Luni</a>
 			</li>
-      <li><a href="#5b" data-toggle="tab">Vineri</a>
+      <li><a href="#2b" data-toggle="tab">Marți</a>
 			</li>
 		</ul>
 </div>
@@ -96,7 +96,7 @@
 			  <div class="tab-pane active" id="1b">
 
           <% item0.forEach(function(i) { %>
-            <div class="col-sm-4">
+            <div class="col-sm-8 col-centered">
               <div class="card card-block">
                 <h3 class="card-title"><%= i.nume %></h3>
                 <p class="card-text"><%= i.info %><br>
@@ -111,7 +111,7 @@
 				</div>
 				<div class="tab-pane rightman" id="2b">
           <% item1.forEach(function(i) { %>
-            <div class="col-sm-8">
+            <div class="col-sm-8 col-centered">
               <div class="card card-block">
                 <h3 class="card-title"><%= i.nume %></h3>
                 <p class="card-text"><%= i.info %><br>
@@ -125,7 +125,7 @@
 				</div>
         <div class="tab-pane" id="3b">
           <% item2.forEach(function(i) { %>
-            <div class="col-sm-8">
+            <div class="col-sm-8 col-centered">
               <div class="card card-block">
                 <h3 class="card-title"><%= i.nume %></h3>
                 <p class="card-text"><%= i.info %><br>
@@ -139,7 +139,7 @@
 				</div>
           <div class="tab-pane" id="4b">
           <% item3.forEach(function(i) { %>
-            <div class="col-sm-8">
+            <div class="col-sm-8 col-centered">
               <div class="card card-block">
                 <h3 class="card-title"><%= i.nume %></h3>
                 <p class="card-text"><%= i.info %><br>
@@ -153,7 +153,7 @@
 				</div>
           <div class="tab-pane" id="5b">
           <% item4.forEach(function(i) { %>
-            <div class="col-sm-8">
+            <div class="col-sm-8 col-centered">
               <div class="card card-block">
                 <h3 class="card-title"><%= i.nume %></h3>
                 <p class="card-text"><%= i.info %><br>
