@@ -1,8 +1,6 @@
-# express-authentication
+# Registration platform
 
-Simple authentication app using express, node & passport.
-
-Authenticate locally or through Facebook, Twitter or Google.
+A registration platform created by me for my school. Feel free to use this anywhere you want :D
 
 ## Prerequisites 
 
